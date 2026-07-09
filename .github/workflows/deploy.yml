@@ -31,47 +31,11 @@ jobs:
         env:
           # Repo is served at https://digipete.github.io/public-value-connect-5f341df4/
           VITE_BASE_PATH: /public-value-connect-5f341df4/
-          # Produce static browser assets for GitHub Pages.
-          NITRO_PRESET: static
-        run: |
-          set +e
-          bun run build
-          BUILD_EXIT=$?
-          set -e
-
-          # The TanStack/Nitro build currently writes the static Pages-ready
-          # browser bundle before a server-only SSR packaging step fails in CI.
-          # For GitHub Pages we only need that static artifact.
-          if [ "$BUILD_EXIT" -ne 0 ] && [ ! -d ".output/public" ] && [ ! -d "dist/client" ]; then
-            exit "$BUILD_EXIT"
-          fi
+        run: bunx vite build --config vite.pages.config.ts
 
       - name: Prepare Pages artifact
         run: |
-          # Vite/Nitro writes static assets to .output/public. Fall back to
-          # dist/client for older local output layouts.
-          PUBLISH_DIR=".output/public"
-          if [ ! -d "$PUBLISH_DIR" ]; then PUBLISH_DIR="dist/client"; fi
-
-          if [ ! -f "$PUBLISH_DIR/index.html" ]; then
-            ENTRY_JS="$(basename "$(ls "$PUBLISH_DIR"/assets/index-*.js | head -n 1)")"
-            STYLES_CSS="$(basename "$(ls "$PUBLISH_DIR"/assets/styles-*.css | head -n 1)")"
-            printf '%s\n' \
-              '<!doctype html>' \
-              '<html lang="en">' \
-              '  <head>' \
-              '    <meta charset="utf-8" />' \
-              '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
-              '    <title>Open Appointments Exchange — NHS prototype</title>' \
-              '    <meta name="description" content="A fictional NHS proof of concept exploring how patients, providers and suppliers can coordinate around a shared appointment object." />' \
-              '    <link rel="icon" href="/public-value-connect-5f341df4/favicon.ico" type="image/x-icon" />' \
-              "    <link rel=\"stylesheet\" crossorigin href=\"/public-value-connect-5f341df4/assets/$STYLES_CSS\" />" \
-              "    <script type=\"module\" crossorigin src=\"/public-value-connect-5f341df4/assets/$ENTRY_JS\"></script>" \
-              '  </head>' \
-              '  <body></body>' \
-              '</html>' \
-              > "$PUBLISH_DIR/index.html"
-          fi
+          PUBLISH_DIR="pages-dist"
 
           # SPA fallback so refreshing a deep link doesn't 404.
           if [ -f "$PUBLISH_DIR/index.html" ]; then
