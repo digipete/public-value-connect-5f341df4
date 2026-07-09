@@ -11,7 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RoleRouteImport } from './routes/role'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProviderIndexRouteImport } from './routes/provider/index'
 import { Route as PatientIndexRouteImport } from './routes/patient/index'
+import { Route as ProviderProfileRouteImport } from './routes/provider/profile'
+import { Route as ProviderImproveRouteImport } from './routes/provider/improve'
+import { Route as ProviderDemandRouteImport } from './routes/provider/demand'
+import { Route as ProviderCapacityRouteImport } from './routes/provider/capacity'
 import { Route as PatientTimelineRouteImport } from './routes/patient/timeline'
 import { Route as PatientOptionsRouteImport } from './routes/patient/options'
 import { Route as PatientConfirmationRouteImport } from './routes/patient/confirmation'
@@ -27,9 +32,34 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProviderIndexRoute = ProviderIndexRouteImport.update({
+  id: '/provider/',
+  path: '/provider/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PatientIndexRoute = PatientIndexRouteImport.update({
   id: '/patient/',
   path: '/patient/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderProfileRoute = ProviderProfileRouteImport.update({
+  id: '/provider/profile',
+  path: '/provider/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderImproveRoute = ProviderImproveRouteImport.update({
+  id: '/provider/improve',
+  path: '/provider/improve',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderDemandRoute = ProviderDemandRouteImport.update({
+  id: '/provider/demand',
+  path: '/provider/demand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderCapacityRoute = ProviderCapacityRouteImport.update({
+  id: '/provider/capacity',
+  path: '/provider/capacity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PatientTimelineRoute = PatientTimelineRouteImport.update({
@@ -60,7 +90,12 @@ export interface FileRoutesByFullPath {
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
   '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
   '/patient/': typeof PatientIndexRoute
+  '/provider/': typeof ProviderIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +104,12 @@ export interface FileRoutesByTo {
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
   '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
   '/patient': typeof PatientIndexRoute
+  '/provider': typeof ProviderIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,7 +119,12 @@ export interface FileRoutesById {
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
   '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
   '/patient/': typeof PatientIndexRoute
+  '/provider/': typeof ProviderIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,7 +135,12 @@ export interface FileRouteTypes {
     | '/patient/confirmation'
     | '/patient/options'
     | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
     | '/patient/'
+    | '/provider/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -99,7 +149,12 @@ export interface FileRouteTypes {
     | '/patient/confirmation'
     | '/patient/options'
     | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
     | '/patient'
+    | '/provider'
   id:
     | '__root__'
     | '/'
@@ -108,7 +163,12 @@ export interface FileRouteTypes {
     | '/patient/confirmation'
     | '/patient/options'
     | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
     | '/patient/'
+    | '/provider/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,7 +178,12 @@ export interface RootRouteChildren {
   PatientConfirmationRoute: typeof PatientConfirmationRoute
   PatientOptionsRoute: typeof PatientOptionsRoute
   PatientTimelineRoute: typeof PatientTimelineRoute
+  ProviderCapacityRoute: typeof ProviderCapacityRoute
+  ProviderDemandRoute: typeof ProviderDemandRoute
+  ProviderImproveRoute: typeof ProviderImproveRoute
+  ProviderProfileRoute: typeof ProviderProfileRoute
   PatientIndexRoute: typeof PatientIndexRoute
+  ProviderIndexRoute: typeof ProviderIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -137,11 +202,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/provider/': {
+      id: '/provider/'
+      path: '/provider'
+      fullPath: '/provider/'
+      preLoaderRoute: typeof ProviderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/patient/': {
       id: '/patient/'
       path: '/patient'
       fullPath: '/patient/'
       preLoaderRoute: typeof PatientIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/profile': {
+      id: '/provider/profile'
+      path: '/provider/profile'
+      fullPath: '/provider/profile'
+      preLoaderRoute: typeof ProviderProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/improve': {
+      id: '/provider/improve'
+      path: '/provider/improve'
+      fullPath: '/provider/improve'
+      preLoaderRoute: typeof ProviderImproveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/demand': {
+      id: '/provider/demand'
+      path: '/provider/demand'
+      fullPath: '/provider/demand'
+      preLoaderRoute: typeof ProviderDemandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/capacity': {
+      id: '/provider/capacity'
+      path: '/provider/capacity'
+      fullPath: '/provider/capacity'
+      preLoaderRoute: typeof ProviderCapacityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/patient/timeline': {
@@ -182,7 +282,12 @@ const rootRouteChildren: RootRouteChildren = {
   PatientConfirmationRoute: PatientConfirmationRoute,
   PatientOptionsRoute: PatientOptionsRoute,
   PatientTimelineRoute: PatientTimelineRoute,
+  ProviderCapacityRoute: ProviderCapacityRoute,
+  ProviderDemandRoute: ProviderDemandRoute,
+  ProviderImproveRoute: ProviderImproveRoute,
+  ProviderProfileRoute: ProviderProfileRoute,
   PatientIndexRoute: PatientIndexRoute,
+  ProviderIndexRoute: ProviderIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
