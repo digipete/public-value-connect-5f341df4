@@ -81,16 +81,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "A fictional NHS proof of concept exploring how patients, providers and suppliers coordinate around a shared appointment object.",
+          "A fictional NHS proof of concept exploring how patients, providers and suppliers can coordinate around a shared appointment object.",
       },
       { property: "og:title", content: "Open Appointments Exchange — NHS prototype" },
       {
         property: "og:description",
         content:
-          "A fictional NHS proof of concept exploring how patients, providers and suppliers coordinate around a shared appointment object.",
+          "A fictional NHS proof of concept exploring how patients, providers and suppliers can coordinate around a shared appointment object.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Open Appointments Exchange — NHS prototype" },
+      { name: "twitter:description", content: "A fictional NHS proof of concept exploring how patients, providers and suppliers can coordinate around a shared appointment object." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/be3f8c6b-ddcb-4ba0-aad8-314b859b7f04/id-preview-171cf884--a8489104-39ca-4937-b648-ade07419786a.lovable.app-1783590819296.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/be3f8c6b-ddcb-4ba0-aad8-314b859b7f04/id-preview-171cf884--a8489104-39ca-4937-b648-ade07419786a.lovable.app-1783590819296.png" },
     ],
     links: [
       {
