@@ -32,14 +32,23 @@ jobs:
           # Repo is served at https://<user>.github.io/public-value-connect/
           # (and proxied via hallett.life/public-value-connect/).
           VITE_BASE_PATH: /public-value-connect/
+          # Produce a fully static bundle (prerendered HTML) instead of the
+          # default Cloudflare Worker output.
+          NITRO_PRESET: static
         run: bun run build
 
       - name: Prepare Pages artifact
         run: |
-          # Nitro emits static client assets to dist/client and the Worker
-          # bundle to dist/server. GitHub Pages only needs the client dir.
-          cp dist/client/index.html dist/client/404.html
-          touch dist/client/.nojekyll
+          # With the static preset, Nitro prerenders every route into
+          # dist/public/. Fall back to dist/client if that's absent.
+          PUBLISH_DIR="dist/public"
+          if [ ! -d "$PUBLISH_DIR" ]; then PUBLISH_DIR="dist/client"; fi
+          echo "PUBLISH_DIR=$PUBLISH_DIR" >> "$GITHUB_ENV"
+          # SPA fallback so refreshing a deep link doesn't 404.
+          if [ -f "$PUBLISH_DIR/index.html" ]; then
+            cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/404.html"
+          fi
+          touch "$PUBLISH_DIR/.nojekyll"
 
       - uses: actions/configure-pages@v5
 
