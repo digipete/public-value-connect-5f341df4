@@ -76,6 +76,15 @@ jobs:
           # SPA fallback so refreshing a deep link doesn't 404.
           if [ -f "$PUBLISH_DIR/index.html" ]; then
             cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/404.html"
+            for route in \
+              role \
+              patient patient/appointment patient/confirmation patient/options patient/timeline \
+              provider provider/capacity provider/demand provider/improve provider/profile \
+              supplier supplier/changes supplier/conformance supplier/object \
+              national national/impact national/learning; do
+              mkdir -p "$PUBLISH_DIR/$route"
+              cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/$route/index.html"
+            done
           fi
           touch "$PUBLISH_DIR/.nojekyll"
 
