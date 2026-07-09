@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SupplierIndexRouteImport } from './routes/supplier/index'
 import { Route as ProviderIndexRouteImport } from './routes/provider/index'
 import { Route as PatientIndexRouteImport } from './routes/patient/index'
+import { Route as NationalIndexRouteImport } from './routes/national/index'
 import { Route as SupplierObjectRouteImport } from './routes/supplier/object'
 import { Route as SupplierConformanceRouteImport } from './routes/supplier/conformance'
 import { Route as SupplierChangesRouteImport } from './routes/supplier/changes'
@@ -25,6 +26,8 @@ import { Route as PatientTimelineRouteImport } from './routes/patient/timeline'
 import { Route as PatientOptionsRouteImport } from './routes/patient/options'
 import { Route as PatientConfirmationRouteImport } from './routes/patient/confirmation'
 import { Route as PatientAppointmentRouteImport } from './routes/patient/appointment'
+import { Route as NationalLearningRouteImport } from './routes/national/learning'
+import { Route as NationalImpactRouteImport } from './routes/national/impact'
 
 const RoleRoute = RoleRouteImport.update({
   id: '/role',
@@ -49,6 +52,11 @@ const ProviderIndexRoute = ProviderIndexRouteImport.update({
 const PatientIndexRoute = PatientIndexRouteImport.update({
   id: '/patient/',
   path: '/patient/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NationalIndexRoute = NationalIndexRouteImport.update({
+  id: '/national/',
+  path: '/national/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SupplierObjectRoute = SupplierObjectRouteImport.update({
@@ -106,10 +114,22 @@ const PatientAppointmentRoute = PatientAppointmentRouteImport.update({
   path: '/patient/appointment',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NationalLearningRoute = NationalLearningRouteImport.update({
+  id: '/national/learning',
+  path: '/national/learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NationalImpactRoute = NationalImpactRouteImport.update({
+  id: '/national/impact',
+  path: '/national/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
@@ -121,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/supplier/changes': typeof SupplierChangesRoute
   '/supplier/conformance': typeof SupplierConformanceRoute
   '/supplier/object': typeof SupplierObjectRoute
+  '/national/': typeof NationalIndexRoute
   '/patient/': typeof PatientIndexRoute
   '/provider/': typeof ProviderIndexRoute
   '/supplier/': typeof SupplierIndexRoute
@@ -128,6 +149,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
@@ -139,6 +162,7 @@ export interface FileRoutesByTo {
   '/supplier/changes': typeof SupplierChangesRoute
   '/supplier/conformance': typeof SupplierConformanceRoute
   '/supplier/object': typeof SupplierObjectRoute
+  '/national': typeof NationalIndexRoute
   '/patient': typeof PatientIndexRoute
   '/provider': typeof ProviderIndexRoute
   '/supplier': typeof SupplierIndexRoute
@@ -147,6 +171,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
   '/patient/confirmation': typeof PatientConfirmationRoute
   '/patient/options': typeof PatientOptionsRoute
@@ -158,6 +184,7 @@ export interface FileRoutesById {
   '/supplier/changes': typeof SupplierChangesRoute
   '/supplier/conformance': typeof SupplierConformanceRoute
   '/supplier/object': typeof SupplierObjectRoute
+  '/national/': typeof NationalIndexRoute
   '/patient/': typeof PatientIndexRoute
   '/provider/': typeof ProviderIndexRoute
   '/supplier/': typeof SupplierIndexRoute
@@ -167,6 +194,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/role'
+    | '/national/impact'
+    | '/national/learning'
     | '/patient/appointment'
     | '/patient/confirmation'
     | '/patient/options'
@@ -178,6 +207,7 @@ export interface FileRouteTypes {
     | '/supplier/changes'
     | '/supplier/conformance'
     | '/supplier/object'
+    | '/national/'
     | '/patient/'
     | '/provider/'
     | '/supplier/'
@@ -185,6 +215,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/role'
+    | '/national/impact'
+    | '/national/learning'
     | '/patient/appointment'
     | '/patient/confirmation'
     | '/patient/options'
@@ -196,6 +228,7 @@ export interface FileRouteTypes {
     | '/supplier/changes'
     | '/supplier/conformance'
     | '/supplier/object'
+    | '/national'
     | '/patient'
     | '/provider'
     | '/supplier'
@@ -203,6 +236,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/role'
+    | '/national/impact'
+    | '/national/learning'
     | '/patient/appointment'
     | '/patient/confirmation'
     | '/patient/options'
@@ -214,6 +249,7 @@ export interface FileRouteTypes {
     | '/supplier/changes'
     | '/supplier/conformance'
     | '/supplier/object'
+    | '/national/'
     | '/patient/'
     | '/provider/'
     | '/supplier/'
@@ -222,6 +258,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RoleRoute: typeof RoleRoute
+  NationalImpactRoute: typeof NationalImpactRoute
+  NationalLearningRoute: typeof NationalLearningRoute
   PatientAppointmentRoute: typeof PatientAppointmentRoute
   PatientConfirmationRoute: typeof PatientConfirmationRoute
   PatientOptionsRoute: typeof PatientOptionsRoute
@@ -233,6 +271,7 @@ export interface RootRouteChildren {
   SupplierChangesRoute: typeof SupplierChangesRoute
   SupplierConformanceRoute: typeof SupplierConformanceRoute
   SupplierObjectRoute: typeof SupplierObjectRoute
+  NationalIndexRoute: typeof NationalIndexRoute
   PatientIndexRoute: typeof PatientIndexRoute
   ProviderIndexRoute: typeof ProviderIndexRoute
   SupplierIndexRoute: typeof SupplierIndexRoute
@@ -273,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/patient'
       fullPath: '/patient/'
       preLoaderRoute: typeof PatientIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/national/': {
+      id: '/national/'
+      path: '/national'
+      fullPath: '/national/'
+      preLoaderRoute: typeof NationalIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/supplier/object': {
@@ -352,12 +398,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PatientAppointmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/national/learning': {
+      id: '/national/learning'
+      path: '/national/learning'
+      fullPath: '/national/learning'
+      preLoaderRoute: typeof NationalLearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/national/impact': {
+      id: '/national/impact'
+      path: '/national/impact'
+      fullPath: '/national/impact'
+      preLoaderRoute: typeof NationalImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RoleRoute: RoleRoute,
+  NationalImpactRoute: NationalImpactRoute,
+  NationalLearningRoute: NationalLearningRoute,
   PatientAppointmentRoute: PatientAppointmentRoute,
   PatientConfirmationRoute: PatientConfirmationRoute,
   PatientOptionsRoute: PatientOptionsRoute,
@@ -369,6 +431,7 @@ const rootRouteChildren: RootRouteChildren = {
   SupplierChangesRoute: SupplierChangesRoute,
   SupplierConformanceRoute: SupplierConformanceRoute,
   SupplierObjectRoute: SupplierObjectRoute,
+  NationalIndexRoute: NationalIndexRoute,
   PatientIndexRoute: PatientIndexRoute,
   ProviderIndexRoute: ProviderIndexRoute,
   SupplierIndexRoute: SupplierIndexRoute,
