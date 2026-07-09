@@ -29,9 +29,8 @@ jobs:
 
       - name: Build
         env:
-          # Repo is served at https://<user>.github.io/public-value-connect/
-          # (and proxied via hallett.life/public-value-connect/).
-          VITE_BASE_PATH: /public-value-connect/
+          # Repo is served at https://digipete.github.io/public-value-connect-5f341df4/
+          VITE_BASE_PATH: /public-value-connect-5f341df4/
           # Produce a fully static bundle (prerendered HTML) instead of the
           # default Cloudflare Worker output.
           NITRO_PRESET: static
