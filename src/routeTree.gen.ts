@@ -9,38 +9,303 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RoleRouteImport } from './routes/role'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SupplierIndexRouteImport } from './routes/supplier/index'
+import { Route as ProviderIndexRouteImport } from './routes/provider/index'
+import { Route as PatientIndexRouteImport } from './routes/patient/index'
+import { Route as NationalIndexRouteImport } from './routes/national/index'
+import { Route as SupplierObjectRouteImport } from './routes/supplier/object'
+import { Route as SupplierConformanceRouteImport } from './routes/supplier/conformance'
+import { Route as SupplierChangesRouteImport } from './routes/supplier/changes'
+import { Route as ProviderProfileRouteImport } from './routes/provider/profile'
+import { Route as ProviderImproveRouteImport } from './routes/provider/improve'
+import { Route as ProviderDemandRouteImport } from './routes/provider/demand'
+import { Route as ProviderCapacityRouteImport } from './routes/provider/capacity'
+import { Route as PatientTimelineRouteImport } from './routes/patient/timeline'
+import { Route as PatientOptionsRouteImport } from './routes/patient/options'
+import { Route as PatientConfirmationRouteImport } from './routes/patient/confirmation'
+import { Route as PatientAppointmentRouteImport } from './routes/patient/appointment'
+import { Route as NationalLearningRouteImport } from './routes/national/learning'
+import { Route as NationalImpactRouteImport } from './routes/national/impact'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoleRoute = RoleRouteImport.update({
+  id: '/role',
+  path: '/role',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupplierIndexRoute = SupplierIndexRouteImport.update({
+  id: '/supplier/',
+  path: '/supplier/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderIndexRoute = ProviderIndexRouteImport.update({
+  id: '/provider/',
+  path: '/provider/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientIndexRoute = PatientIndexRouteImport.update({
+  id: '/patient/',
+  path: '/patient/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NationalIndexRoute = NationalIndexRouteImport.update({
+  id: '/national/',
+  path: '/national/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupplierObjectRoute = SupplierObjectRouteImport.update({
+  id: '/supplier/object',
+  path: '/supplier/object',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupplierConformanceRoute = SupplierConformanceRouteImport.update({
+  id: '/supplier/conformance',
+  path: '/supplier/conformance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupplierChangesRoute = SupplierChangesRouteImport.update({
+  id: '/supplier/changes',
+  path: '/supplier/changes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderProfileRoute = ProviderProfileRouteImport.update({
+  id: '/provider/profile',
+  path: '/provider/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderImproveRoute = ProviderImproveRouteImport.update({
+  id: '/provider/improve',
+  path: '/provider/improve',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderDemandRoute = ProviderDemandRouteImport.update({
+  id: '/provider/demand',
+  path: '/provider/demand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderCapacityRoute = ProviderCapacityRouteImport.update({
+  id: '/provider/capacity',
+  path: '/provider/capacity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientTimelineRoute = PatientTimelineRouteImport.update({
+  id: '/patient/timeline',
+  path: '/patient/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientOptionsRoute = PatientOptionsRouteImport.update({
+  id: '/patient/options',
+  path: '/patient/options',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientConfirmationRoute = PatientConfirmationRouteImport.update({
+  id: '/patient/confirmation',
+  path: '/patient/confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientAppointmentRoute = PatientAppointmentRouteImport.update({
+  id: '/patient/appointment',
+  path: '/patient/appointment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NationalLearningRoute = NationalLearningRouteImport.update({
+  id: '/national/learning',
+  path: '/national/learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NationalImpactRoute = NationalImpactRouteImport.update({
+  id: '/national/impact',
+  path: '/national/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
+  '/patient/appointment': typeof PatientAppointmentRoute
+  '/patient/confirmation': typeof PatientConfirmationRoute
+  '/patient/options': typeof PatientOptionsRoute
+  '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
+  '/supplier/changes': typeof SupplierChangesRoute
+  '/supplier/conformance': typeof SupplierConformanceRoute
+  '/supplier/object': typeof SupplierObjectRoute
+  '/national/': typeof NationalIndexRoute
+  '/patient/': typeof PatientIndexRoute
+  '/provider/': typeof ProviderIndexRoute
+  '/supplier/': typeof SupplierIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
+  '/patient/appointment': typeof PatientAppointmentRoute
+  '/patient/confirmation': typeof PatientConfirmationRoute
+  '/patient/options': typeof PatientOptionsRoute
+  '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
+  '/supplier/changes': typeof SupplierChangesRoute
+  '/supplier/conformance': typeof SupplierConformanceRoute
+  '/supplier/object': typeof SupplierObjectRoute
+  '/national': typeof NationalIndexRoute
+  '/patient': typeof PatientIndexRoute
+  '/provider': typeof ProviderIndexRoute
+  '/supplier': typeof SupplierIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/national/impact': typeof NationalImpactRoute
+  '/national/learning': typeof NationalLearningRoute
+  '/patient/appointment': typeof PatientAppointmentRoute
+  '/patient/confirmation': typeof PatientConfirmationRoute
+  '/patient/options': typeof PatientOptionsRoute
+  '/patient/timeline': typeof PatientTimelineRoute
+  '/provider/capacity': typeof ProviderCapacityRoute
+  '/provider/demand': typeof ProviderDemandRoute
+  '/provider/improve': typeof ProviderImproveRoute
+  '/provider/profile': typeof ProviderProfileRoute
+  '/supplier/changes': typeof SupplierChangesRoute
+  '/supplier/conformance': typeof SupplierConformanceRoute
+  '/supplier/object': typeof SupplierObjectRoute
+  '/national/': typeof NationalIndexRoute
+  '/patient/': typeof PatientIndexRoute
+  '/provider/': typeof ProviderIndexRoute
+  '/supplier/': typeof SupplierIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/role'
+    | '/sitemap.xml'
+    | '/national/impact'
+    | '/national/learning'
+    | '/patient/appointment'
+    | '/patient/confirmation'
+    | '/patient/options'
+    | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
+    | '/supplier/changes'
+    | '/supplier/conformance'
+    | '/supplier/object'
+    | '/national/'
+    | '/patient/'
+    | '/provider/'
+    | '/supplier/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/role'
+    | '/sitemap.xml'
+    | '/national/impact'
+    | '/national/learning'
+    | '/patient/appointment'
+    | '/patient/confirmation'
+    | '/patient/options'
+    | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
+    | '/supplier/changes'
+    | '/supplier/conformance'
+    | '/supplier/object'
+    | '/national'
+    | '/patient'
+    | '/provider'
+    | '/supplier'
+  id:
+    | '__root__'
+    | '/'
+    | '/role'
+    | '/sitemap.xml'
+    | '/national/impact'
+    | '/national/learning'
+    | '/patient/appointment'
+    | '/patient/confirmation'
+    | '/patient/options'
+    | '/patient/timeline'
+    | '/provider/capacity'
+    | '/provider/demand'
+    | '/provider/improve'
+    | '/provider/profile'
+    | '/supplier/changes'
+    | '/supplier/conformance'
+    | '/supplier/object'
+    | '/national/'
+    | '/patient/'
+    | '/provider/'
+    | '/supplier/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RoleRoute: typeof RoleRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  NationalImpactRoute: typeof NationalImpactRoute
+  NationalLearningRoute: typeof NationalLearningRoute
+  PatientAppointmentRoute: typeof PatientAppointmentRoute
+  PatientConfirmationRoute: typeof PatientConfirmationRoute
+  PatientOptionsRoute: typeof PatientOptionsRoute
+  PatientTimelineRoute: typeof PatientTimelineRoute
+  ProviderCapacityRoute: typeof ProviderCapacityRoute
+  ProviderDemandRoute: typeof ProviderDemandRoute
+  ProviderImproveRoute: typeof ProviderImproveRoute
+  ProviderProfileRoute: typeof ProviderProfileRoute
+  SupplierChangesRoute: typeof SupplierChangesRoute
+  SupplierConformanceRoute: typeof SupplierConformanceRoute
+  SupplierObjectRoute: typeof SupplierObjectRoute
+  NationalIndexRoute: typeof NationalIndexRoute
+  PatientIndexRoute: typeof PatientIndexRoute
+  ProviderIndexRoute: typeof ProviderIndexRoute
+  SupplierIndexRoute: typeof SupplierIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/role': {
+      id: '/role'
+      path: '/role'
+      fullPath: '/role'
+      preLoaderRoute: typeof RoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +313,150 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/supplier/': {
+      id: '/supplier/'
+      path: '/supplier'
+      fullPath: '/supplier/'
+      preLoaderRoute: typeof SupplierIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/': {
+      id: '/provider/'
+      path: '/provider'
+      fullPath: '/provider/'
+      preLoaderRoute: typeof ProviderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient/': {
+      id: '/patient/'
+      path: '/patient'
+      fullPath: '/patient/'
+      preLoaderRoute: typeof PatientIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/national/': {
+      id: '/national/'
+      path: '/national'
+      fullPath: '/national/'
+      preLoaderRoute: typeof NationalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supplier/object': {
+      id: '/supplier/object'
+      path: '/supplier/object'
+      fullPath: '/supplier/object'
+      preLoaderRoute: typeof SupplierObjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supplier/conformance': {
+      id: '/supplier/conformance'
+      path: '/supplier/conformance'
+      fullPath: '/supplier/conformance'
+      preLoaderRoute: typeof SupplierConformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supplier/changes': {
+      id: '/supplier/changes'
+      path: '/supplier/changes'
+      fullPath: '/supplier/changes'
+      preLoaderRoute: typeof SupplierChangesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/profile': {
+      id: '/provider/profile'
+      path: '/provider/profile'
+      fullPath: '/provider/profile'
+      preLoaderRoute: typeof ProviderProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/improve': {
+      id: '/provider/improve'
+      path: '/provider/improve'
+      fullPath: '/provider/improve'
+      preLoaderRoute: typeof ProviderImproveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/demand': {
+      id: '/provider/demand'
+      path: '/provider/demand'
+      fullPath: '/provider/demand'
+      preLoaderRoute: typeof ProviderDemandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider/capacity': {
+      id: '/provider/capacity'
+      path: '/provider/capacity'
+      fullPath: '/provider/capacity'
+      preLoaderRoute: typeof ProviderCapacityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient/timeline': {
+      id: '/patient/timeline'
+      path: '/patient/timeline'
+      fullPath: '/patient/timeline'
+      preLoaderRoute: typeof PatientTimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient/options': {
+      id: '/patient/options'
+      path: '/patient/options'
+      fullPath: '/patient/options'
+      preLoaderRoute: typeof PatientOptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient/confirmation': {
+      id: '/patient/confirmation'
+      path: '/patient/confirmation'
+      fullPath: '/patient/confirmation'
+      preLoaderRoute: typeof PatientConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient/appointment': {
+      id: '/patient/appointment'
+      path: '/patient/appointment'
+      fullPath: '/patient/appointment'
+      preLoaderRoute: typeof PatientAppointmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/national/learning': {
+      id: '/national/learning'
+      path: '/national/learning'
+      fullPath: '/national/learning'
+      preLoaderRoute: typeof NationalLearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/national/impact': {
+      id: '/national/impact'
+      path: '/national/impact'
+      fullPath: '/national/impact'
+      preLoaderRoute: typeof NationalImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RoleRoute: RoleRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  NationalImpactRoute: NationalImpactRoute,
+  NationalLearningRoute: NationalLearningRoute,
+  PatientAppointmentRoute: PatientAppointmentRoute,
+  PatientConfirmationRoute: PatientConfirmationRoute,
+  PatientOptionsRoute: PatientOptionsRoute,
+  PatientTimelineRoute: PatientTimelineRoute,
+  ProviderCapacityRoute: ProviderCapacityRoute,
+  ProviderDemandRoute: ProviderDemandRoute,
+  ProviderImproveRoute: ProviderImproveRoute,
+  ProviderProfileRoute: ProviderProfileRoute,
+  SupplierChangesRoute: SupplierChangesRoute,
+  SupplierConformanceRoute: SupplierConformanceRoute,
+  SupplierObjectRoute: SupplierObjectRoute,
+  NationalIndexRoute: NationalIndexRoute,
+  PatientIndexRoute: PatientIndexRoute,
+  ProviderIndexRoute: ProviderIndexRoute,
+  SupplierIndexRoute: SupplierIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
