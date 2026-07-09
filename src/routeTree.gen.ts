@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RoleRouteImport } from './routes/role'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SupplierIndexRouteImport } from './routes/supplier/index'
@@ -29,6 +30,11 @@ import { Route as PatientAppointmentRouteImport } from './routes/patient/appoint
 import { Route as NationalLearningRouteImport } from './routes/national/learning'
 import { Route as NationalImpactRouteImport } from './routes/national/impact'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoleRoute = RoleRouteImport.update({
   id: '/role',
   path: '/role',
@@ -128,6 +134,7 @@ const NationalImpactRoute = NationalImpactRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/national/impact': typeof NationalImpactRoute
   '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/national/impact': typeof NationalImpactRoute
   '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/role': typeof RoleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/national/impact': typeof NationalImpactRoute
   '/national/learning': typeof NationalLearningRoute
   '/patient/appointment': typeof PatientAppointmentRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/role'
+    | '/sitemap.xml'
     | '/national/impact'
     | '/national/learning'
     | '/patient/appointment'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/role'
+    | '/sitemap.xml'
     | '/national/impact'
     | '/national/learning'
     | '/patient/appointment'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/role'
+    | '/sitemap.xml'
     | '/national/impact'
     | '/national/learning'
     | '/patient/appointment'
@@ -258,6 +270,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RoleRoute: typeof RoleRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   NationalImpactRoute: typeof NationalImpactRoute
   NationalLearningRoute: typeof NationalLearningRoute
   PatientAppointmentRoute: typeof PatientAppointmentRoute
@@ -279,6 +292,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/role': {
       id: '/role'
       path: '/role'
@@ -418,6 +438,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RoleRoute: RoleRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   NationalImpactRoute: NationalImpactRoute,
   NationalLearningRoute: NationalLearningRoute,
   PatientAppointmentRoute: PatientAppointmentRoute,
