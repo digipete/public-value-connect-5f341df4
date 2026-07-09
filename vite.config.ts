@@ -17,6 +17,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Force the static Nitro preset when deploying to GitHub Pages (CI sets
+  // NITRO_PRESET=static). Inside Lovable's own build the wrapper ignores
+  // this override and keeps cloudflare-module.
+  nitro: process.env.NITRO_PRESET === "static" ? { preset: "static" } : undefined,
   vite: {
     base: basePath,
   },
