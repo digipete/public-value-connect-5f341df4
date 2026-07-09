@@ -1,16 +1,22 @@
-name: Deploy to Cloudflare Workers
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -21,14 +27,41 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build (nitro cloudflare-module)
+      - name: Build
+        env:
+          # Repo is served at https://<user>.github.io/public-value-connect/
+          # (and proxied via hallett.life/public-value-connect/).
+          VITE_BASE_PATH: /public-value-connect/
+          # Produce a fully static bundle (prerendered HTML) instead of the
+          # default Cloudflare Worker output.
+          NITRO_PRESET: static
         run: bun run build
 
-      - name: Deploy with Wrangler
-        uses: cloudflare/wrangler-action@v3
+      - name: Prepare Pages artifact
+        run: |
+          # With the static preset, Nitro prerenders every route into
+          # dist/public/. Fall back to dist/client if that's absent.
+          PUBLISH_DIR="dist/public"
+          if [ ! -d "$PUBLISH_DIR" ]; then PUBLISH_DIR="dist/client"; fi
+          echo "PUBLISH_DIR=$PUBLISH_DIR" >> "$GITHUB_ENV"
+          # SPA fallback so refreshing a deep link doesn't 404.
+          if [ -f "$PUBLISH_DIR/index.html" ]; then
+            cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/404.html"
+          fi
+          touch "$PUBLISH_DIR/.nojekyll"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Nitro emits the final worker + wrangler.json into ./dist
-          workingDirectory: dist
-          command: deploy
+          path: ${{ env.PUBLISH_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
