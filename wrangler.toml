@@ -1,0 +1,17 @@
+#:schema node_modules/wrangler/config-schema.json
+# Cloudflare Workers config for Open Appointments Exchange.
+# Nitro merges this with build-generated settings (main entry, assets binding, etc.)
+# and writes the final config to dist/wrangler.json during `bun run build`.
+#
+# Change `name` to whatever you want the Worker to be called in your Cloudflare account.
+# Add [[routes]] or workers_dev settings via the Cloudflare dashboard, or uncomment
+# and fill in the block below.
+
+name = "public-value-connect"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Uncomment and set your zone to bind the Worker to a custom route.
+# [[routes]]
+# pattern = "hallett.life/public-value-connect/*"
+# zone_name = "hallett.life"
