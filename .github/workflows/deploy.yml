@@ -27,37 +27,28 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build static site
+      - name: Build static SPA
         env:
-          # Repo is served at https://digipete.github.io/public-value-connect-5f341df4/
           VITE_BASE_PATH: /public-value-connect-5f341df4/
         run: bunx vite build --config vite.pages.config.ts
 
-      - name: Prepare Pages artifact
+      - name: Assemble Pages artifact
         run: |
-          PUBLISH_DIR="pages-dist"
-          if [ ! -f "$PUBLISH_DIR/index.html" ] && [ -f "$PUBLISH_DIR/index.pages.html" ]; then
-            mv "$PUBLISH_DIR/index.pages.html" "$PUBLISH_DIR/index.html"
+          OUT=pages-artifact
+          rm -rf "$OUT"
+          mkdir -p "$OUT"
+          cp -R dist-pages/. "$OUT"/
+          # Vite emits the entry as index.pages.html; GH Pages needs index.html
+          if [ -f "$OUT/index.pages.html" ] && [ ! -f "$OUT/index.html" ]; then
+            mv "$OUT/index.pages.html" "$OUT/index.html"
           fi
-
-          # SPA fallback so refreshing a deep link doesn't 404.
-          if [ -f "$PUBLISH_DIR/index.html" ]; then
-            cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/404.html"
-            for route in \
-              role \
-              patient patient/appointment patient/confirmation patient/options patient/timeline \
-              provider provider/capacity provider/demand provider/improve provider/profile \
-              supplier supplier/changes supplier/conformance supplier/object \
-              national national/impact national/learning; do
-              mkdir -p "$PUBLISH_DIR/$route"
-              cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/$route/index.html"
-            done
+          # Copy public assets (favicon etc.)
+          if [ -d public ]; then
+            cp -R public/. "$OUT"/ 2>/dev/null || true
           fi
-          touch "$PUBLISH_DIR/.nojekyll"
-
-          rm -rf pages-artifact
-          mkdir -p pages-artifact
-          cp -R "$PUBLISH_DIR"/. pages-artifact/
+          # SPA fallback so deep-link refresh works on GitHub Pages
+          cp "$OUT/index.html" "$OUT/404.html"
+          touch "$OUT/.nojekyll"
 
       - uses: actions/configure-pages@v5
 
