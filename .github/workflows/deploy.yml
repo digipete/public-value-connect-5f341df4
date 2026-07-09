@@ -54,7 +54,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: ${{ env.PUBLISH_DIR }}
 
   deploy:
     needs: build
