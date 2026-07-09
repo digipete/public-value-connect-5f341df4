@@ -36,6 +36,9 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           PUBLISH_DIR="pages-dist"
+          if [ ! -f "$PUBLISH_DIR/index.html" ] && [ -f "$PUBLISH_DIR/index.pages.html" ]; then
+            mv "$PUBLISH_DIR/index.pages.html" "$PUBLISH_DIR/index.html"
+          fi
 
           # SPA fallback so refreshing a deep link doesn't 404.
           if [ -f "$PUBLISH_DIR/index.html" ]; then
